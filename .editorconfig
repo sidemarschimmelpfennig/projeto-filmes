@@ -15,7 +15,7 @@ insert_final_newline = true  # Garantir que o arquivo termine com uma nova linha
 # Configurações específicas para arquivos de JavaScript
 [*.js]
 indent_size = 2
-
+end_of_line = lf
 # Configurações específicas para arquivos Vue
 [*.vue]
 indent_size = 2
