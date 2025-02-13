@@ -1,13 +1,22 @@
 <template>
-  <router-view />
+  <div id="app">
+    <div class="flex justify-between border-b border-gray-600">
+      <NavbarComponent />
+      <SearchbarComponent />
+    </div>
+    <router-view />
+  </div>
 </template>
+<script>
+import NavbarComponent from "@/components/header/NavbarComponent.vue";
+import SearchbarComponent from "@/components/header/SearchbarComponent.vue";
+export default {
+  name: "App",
+  components: {
+    NavbarComponent,
+    SearchbarComponent,
+  },
+};
+</script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-</style>
+<style lang="scss"></style>

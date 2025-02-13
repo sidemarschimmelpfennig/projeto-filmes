@@ -1,13 +1,18 @@
 <template>
-  <div class="home">
-    <h1>Teste</h1>
+  <div class="container mx-auto">
+    <PopularMoviesView />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
+import PopularMoviesView from "@/views/PopularMoviesView.vue";
 
 export default {
   name: "HomeView",
+  components: {
+    PopularMoviesView,
+  },
 };
 </script>
+
+<style scoped lang="scss"></style>
