@@ -2,7 +2,7 @@
   <div id="app">
     <div class="flex justify-between border-b border-gray-600">
       <NavbarComponent />
-      <SearchbarComponent />
+      <SearchbarComponent class="mr-5" />
     </div>
     <router-view />
   </div>
@@ -15,6 +15,12 @@ export default {
   components: {
     NavbarComponent,
     SearchbarComponent,
+  },
+  created() {
+    document.title = "Cinema do Detalhe";
+    document
+      .querySelector("link[rel='icon']")
+      .setAttribute("href", "/img/icons/favicon.ico");
   },
 };
 </script>
