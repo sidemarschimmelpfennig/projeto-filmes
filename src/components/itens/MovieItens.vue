@@ -1,13 +1,13 @@
 <template>
   <div>
-    <router-link to="/movie/11">
+    <router-link :to="`/movie/${movie.id}`">
       <img
-        src="@/assets/images/Coringa.jpg"
+        :src="imagePath"
         class="hover:opacity-75 hover:cursor-pointer transition ease-in-out duration-150"
       />
     </router-link>
 
-    <h3>2067</h3>
+    <h3>{{ movie.title }}</h3>
     <div class="flex">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -23,16 +23,54 @@
         />
       </svg>
 
-      47% | 2020-10-01 <br />
+      {{ (movie.vote_average * 10).toFixed(2) }} % | {{ movie.release_date }}
+      <br />
     </div>
-    <span class="text-sm text-gray-500"
-      >Ficção Cientifica, Thriller, Drama</span
-    >
+    <span class="text-sm text-gray-500">
+      {{ genresList() }}
+      <!-- Chama a função para mostrar os gêneros -->
+    </span>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    movie: {
+      type: Object,
+      required: true,
+    },
+    genres: {
+      type: Array,
+      required: true,
+    },
+  },
+  computed: {
+    imagePath() {
+      return `https://image.tmdb.org/t/p/w500${this.movie.poster_path}`;
+    },
+  },
+  methods: {
+    getGenreName(id) {
+      const genre = this.genres.find(g => g.id === id);
+      return genre ? genre.name : "";
+    },
+
+    genresList() {
+      return this.movie.genre_ids
+        .map((id, index) => {
+          const genreName = this.getGenreName(id);
+          if (genreName) {
+            return index < this.movie.genre_ids.length - 1
+              ? genreName + ","
+              : genreName;
+          }
+          return "";
+        })
+        .join(" ");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

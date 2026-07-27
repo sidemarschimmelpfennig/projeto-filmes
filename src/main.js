@@ -1,10 +1,15 @@
-import { createApp } from "vue";
+import { createApp } from "vue"; // Alterado para importar createApp
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
-import VueAxios from "vue-axios";
+import axios from "./axios";
 
-// Create a Vue application instance
-createApp(App).use(store).use(router).use(VueAxios).mount("#app");
+const app = createApp(App);
+app.config.globalProperties.$axios = axios;
+app.use(store); // Em Vue 3, o store é integrado assim
+app.use(router); // Mesmo para o router
+// E o VueAxios também
+
+app.mount("#app"); // Finalmente, monta o app

@@ -1,11 +1,14 @@
 <template>
   <div class="mb-2 flex">
-    <img
-      src="@/assets/images/netflix_logo_text.png"
-      class="h-10 mt-5 ml-5"
-      alt=""
-      srcset=""
-    />
+    <router-link to="/">
+      <img
+        src="@/assets/images/netflix_logo_text.png"
+        class="h-10 mt-5 ml-5"
+        alt=""
+        srcset=""
+      />
+    </router-link>
+
     <ul class="flex mt-5">
       <li>
         <router-link to="/movies" class="ml-5">Filmes</router-link>
