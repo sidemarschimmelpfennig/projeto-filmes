@@ -19,7 +19,7 @@
         />
       </svg>
     </div>
-    <div class="absolute mt-12 ml-2 rounded bg-gray-600 w-52" v-if="false">
+    <div v-if="false" class="absolute mt-12 ml-2 rounded bg-gray-600 w-52">
       <ul class="mt-3">
         <li class="flex items-center p-1 border-b border-gray-500">
           <img class="w-10 mr-3" src="@/assets/images/Coringa.jpg" alt="" />
