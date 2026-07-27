@@ -11,13 +11,10 @@
 
     <ul class="flex mt-5">
       <li>
-        <router-link to="/movies" class="ml-5">Filmes</router-link>
+        <router-link to="/" class="ml-5">Filmes</router-link>
       </li>
       <li>
         <router-link to="/actors" class="ml-5">Atores</router-link>
-      </li>
-      <li>
-        <router-link to="/profile" class="ml-5">Perfil</router-link>
       </li>
     </ul>
   </div>
