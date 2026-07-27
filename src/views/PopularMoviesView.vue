@@ -49,6 +49,27 @@
         :genres="genres"
       />
     </div>
+
+    <!-- Paginação -->
+    <div class="flex justify-center items-center gap-4 mt-12 mb-8">
+      <button
+        :disabled="currentPage <= 1"
+        class="px-4 py-2 rounded bg-gray-800 border border-gray-700 text-gray-300 font-medium hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+        @click="changePage(currentPage - 1)"
+      >
+        Anterior
+      </button>
+      <span class="text-gray-400 font-medium">
+        Página {{ currentPage }} de {{ totalPages }}
+      </span>
+      <button
+        :disabled="currentPage >= totalPages"
+        class="px-4 py-2 rounded bg-gray-800 border border-gray-700 text-gray-300 font-medium hover:bg-gray-700 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition duration-150 ease-in-out"
+        @click="changePage(currentPage + 1)"
+      >
+        Próximo
+      </button>
+    </div>
   </div>
 </template>
 
@@ -64,6 +85,8 @@ export default {
       movies: [],
       genres: [],
       selectedGenreId: null,
+      currentPage: 1,
+      totalPages: 1,
     };
   },
   mounted() {
@@ -73,12 +96,13 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        let url = "/movie/popular?language=pt-BR";
+        let url = `/movie/popular?language=pt-BR&page=${this.currentPage}`;
         if (this.selectedGenreId !== null) {
-          url = `/discover/movie?language=pt-BR&with_genres=${this.selectedGenreId}`;
+          url = `/discover/movie?language=pt-BR&with_genres=${this.selectedGenreId}&page=${this.currentPage}`;
         }
         const response = await this.$axios.get(url);
         this.movies = response.data.results;
+        this.totalPages = Math.min(response.data.total_pages, 500);
       } catch (error) {
         console.log(error.message);
       }
@@ -95,11 +119,19 @@ export default {
     },
     selectGenre(genreId) {
       this.selectedGenreId = genreId;
+      this.currentPage = 1;
       this.fetchMovies();
     },
     getSelectedGenreName() {
       const genre = this.genres.find(g => g.id === this.selectedGenreId);
       return genre ? genre.name : "Filmes";
+    },
+    changePage(page) {
+      if (page >= 1 && page <= this.totalPages) {
+        this.currentPage = page;
+        this.fetchMovies();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
     },
   },
 };
