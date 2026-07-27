@@ -27,7 +27,6 @@
         </li>
       </ul>
     </div>
-    <img src="@/assets/images/avatar.png" class="h-10 rounded-full" alt="" />
   </div>
 </template>
 
