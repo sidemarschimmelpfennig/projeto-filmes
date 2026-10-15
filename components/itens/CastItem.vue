@@ -1,13 +1,14 @@
 <template>
-  <div></div>
+  <div class="cast-item"></div>
 </template>
 
 <script>
 export default {
+  name: "CastItem",
   props: {
     cast: {
       type: Array,
-      required: true,
+      default: () => [],
     },
   },
 };
